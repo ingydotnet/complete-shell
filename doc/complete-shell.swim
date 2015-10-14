@@ -1,0 +1,99 @@
+complete-shell
+==============
+
+Command Completion for Everything
+
+= Status
+
+WARNING: THIS FRAMEWORK IS BRAND NEW.
+
+It's really not any good yet...
+
+* Only completes subcommands
+* Only completes 1 level
+* Only tested on Linux so far
+* Only works on Bash so far
+* Only supports YAML definition files so far
+
+Stay tuned.
+
+Pull Requests welcome!
+
+= Synopsis
+
+  # Install a command-completion-definition repo from GitHub:
+  complete-shell install some-hacker/complete-some-command
+  # Or explicitly:
+  complete-shell install https://github.com/some-hacker/complete-some-command.git
+
+  some-command <TAB><TAB>
+
+= Description
+
+CompleteShell adds command completion for everything, everywhere. It provides
+a framework for common shells to define completion with simple YAML or JSON
+files.
+
+People can easily write completion definition files for commands that don't
+yet have completion and share them with the world. They can also write their
+own custom files, or fine tune existing ones to their liking.
+
+= Basic Usage
+
+Here is a simple example. Define a file called `~/complete-foo.yaml`:
+
+  # Command name
+  cmd: foo
+  # Command options
+  opt:
+  - --aaa
+  - --bbb
+  # Sub-commands
+  sub:
+  - cmd: bar
+  - cmd: baz
+
+Then run:
+
+  complete-shell bash ~/complete-foo.yaml
+  complete-shell add ~/complete-foo.bash
+
+Now you have command completion for the `foo` command!
+
+= Installation
+
+Run these commands:
+
+  git clone https://github.com/ingydotnet/complete-shell
+  # In your Shell startup configuration file:
+  source /path/to/complete-shell/.activate
+
+That's it!
+
+= The `complete-shell` Command
+
+CompleteShell adds a command called `complete-shell` that allows you to show,
+add and maintain your completion files.
+
+Here is a list of commands:
+
+- `add`
+
+  Adds a complete-shell configuration file your config.
+
+- `install user/complete-repo`
+
+  Clone a definition repo from GitHub and add it.
+
+= Some Completion Repos
+
+- `ingydotnet/vagrant`
+
+  Command completion for the Vagrant command.
+
+= Development
+
+= To Do
+
+...lots...
+

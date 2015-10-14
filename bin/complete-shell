@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+die() { echo "$@" >&2; exit 1; }
+
+main() {
+  [[ -n "$COMPLETE_SHELL_ROOT" && -d "$COMPLETE_SHELL_ROOT" ]] ||
+    die "complete-shell not properly activated"
+  [[ $# == 2 &&
+     $1 =~ ^add$ &&
+     -f $2 &&
+     $2 =~ \.bash$
+  ]] || die "Usage complete-shell add <file.bash>"
+
+  complete-shell:add "$2"
+}
+
+complete-shell:add() {
+  local file="$1"
+  if [[ ! $file =~ ^/ ]]; then
+    local dir="$(cd -P "$(dirname $file)"; pwd)"
+    file="$dir/$(basename $file)"
+  fi
+  [[ $file =~ /complete-([^/]+).bash$ ]] ||
+    die "Invalid file to add: '$file'"
+  local name="${BASH_REMATCH[1]}"
+  git config -f "$COMPLETE_SHELL_ROOT/config" \
+    "complete-shell.$name" "$file"
+}
+
+[[ $0 != $BASH_SOURCE ]] || main "$@"
+
+# vim: set ft=sh sw=2 lisp:

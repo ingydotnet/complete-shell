@@ -1,0 +1,14 @@
+#! bash
+
+main() {
+  export COMPLETE_SHELL_ROOT="$(cd -P "$(dirname "$BASH_SOURCE")"; pwd)"
+  # readonly COMPLETE_SHELL_ROOT
+  export PATH="$COMPLETE_SHELL_ROOT/bin:$PATH"
+  export MANPATH="$COMPLETE_SHELL_ROOT/man:$MANPATH"
+
+  source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash"
+
+  complete-shell:activate-all
+}
+
+main "$@"
