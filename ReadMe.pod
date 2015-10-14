@@ -14,7 +14,7 @@ complete-shell - Command Completion for Everything
 
 WARNING: THIS FRAMEWORK IS BRAND NEW.
 
-It's really not any good yet...
+It's really not any good yet! The API B<will> change!
 
 =over
 
