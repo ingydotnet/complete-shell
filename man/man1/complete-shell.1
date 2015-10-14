@@ -100,13 +100,12 @@ Stay tuned.
 Pull Requests welcome!
 .SH "Synopsis"
 .IX Header "Synopsis"
-.Vb 4
-\&    # Install a command\-completion\-definition repo from GitHub:
-\&    complete\-shell install some\-hacker/complete\-some\-command
-\&    # Or explicitly:
-\&    complete\-shell install https://github.com/some\-hacker/complete\-some\-command.git
+.Vb 3
+\&    # Install a command\-completion\-definition repo from GitHub. Like Vagrant,
+\&    # for example:
+\&    complete\-shell install ingydotnet/vagrant
 \&
-\&    some\-command <TAB><TAB>
+\&    vagrant <TAB><TAB>
 .Ve
 .SH "Description"
 .IX Header "Description"
@@ -133,7 +132,7 @@ Here is a simple example. Define a file called \f(CW\*(C`~/complete\-foo.yaml\*(
 Then run:
 .PP
 .Vb 2
-\&    complete\-shell bash ~/complete\-foo.yaml
+\&    complete\-shell make\-bash ~/complete\-foo.yaml
 \&    complete\-shell add ~/complete\-foo.bash
 .Ve
 .PP
@@ -163,6 +162,10 @@ Adds a complete-shell configuration file your config.
 .el .IP "\f(CWinstall user/complete\-repo\fR" 4
 .IX Item "install user/complete-repo"
 Clone a definition repo from GitHub and add it.
+.ie n .IP """rehash""" 4
+.el .IP "\f(CWrehash\fR" 4
+.IX Item "rehash"
+Reloads all your completion settings. Not normally needed.
 .SH "Some Completion Repos"
 .IX Header "Some Completion Repos"
 .ie n .IP """ingydotnet/vagrant""" 4

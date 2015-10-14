@@ -36,12 +36,11 @@ Pull Requests welcome!
 
 =head1 Synopsis
 
-    # Install a command-completion-definition repo from GitHub:
-    complete-shell install some-hacker/complete-some-command
-    # Or explicitly:
-    complete-shell install https://github.com/some-hacker/complete-some-command.git
+    # Install a command-completion-definition repo from GitHub. Like Vagrant,
+    # for example:
+    complete-shell install ingydotnet/vagrant
 
-    some-command <TAB><TAB>
+    vagrant <TAB><TAB>
 
 =head1 Description
 
@@ -70,7 +69,7 @@ Here is a simple example. Define a file called C<~/complete-foo.yaml>:
 
 Then run:
 
-    complete-shell bash ~/complete-foo.yaml
+    complete-shell make-bash ~/complete-foo.yaml
     complete-shell add ~/complete-foo.bash
 
 Now you have command completion for the C<foo> command!
@@ -101,6 +100,10 @@ Adds a complete-shell configuration file your config.
 =item C<install user/complete-repo>
 
 Clone a definition repo from GitHub and add it.
+
+=item C<rehash>
+
+Reloads all your completion settings. Not normally needed.
 
 =back
 

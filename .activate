@@ -8,7 +8,7 @@ main() {
 
   source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash"
 
-  complete-shell:activate-all
+  complete-shell add share/complete-complete-shell.bash
 }
 
 main "$@"
