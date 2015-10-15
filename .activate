@@ -5,5 +5,14 @@ export PATH="$COMPLETE_SHELL_ROOT/bin:$PATH"
 export MANPATH="$COMPLETE_SHELL_ROOT/man:$MANPATH"
 
 source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash"
-__complete-shell:add \
-  "$COMPLETE_SHELL_ROOT/share/complete-complete-shell.bash"
+
+if __complete-shell:check-env; then
+  (
+    cd "$COMPLETE_SHELL_ROOT"
+    [[ -d node_modules ]] || mkdir node_modules
+    [[ -d node_modules/js-yaml ]] ||
+      npm install js-yaml
+  )
+  __complete-shell:add \
+    "$COMPLETE_SHELL_ROOT/share/complete-complete-shell.yaml"
+fi

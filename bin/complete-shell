@@ -21,15 +21,12 @@ x           Debug - Turn on Bash trace (set -x) output
 main() {
   source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash"
 
-  check-env
+  __complete-shell:check-env ||
+    die "complete-shell command failed."
+
   get-opts "$@"
 
   "__complete-shell:$command_name" "${command_args[@]}"
-}
-
-check-env() {
-  [[ -n "$COMPLETE_SHELL_ROOT" && -d "$COMPLETE_SHELL_ROOT" ]] ||
-    die "complete-shell not properly activated"
 }
 
 get-opts() {

@@ -9,7 +9,7 @@ __complete-shell:add() {
     local dir="$(cd -P "$(dirname $file)"; pwd)"
     file="$dir/$(basename $file)"
   fi
-  [[ $file =~ /complete-([^/]+).bash$ ]] ||
+  [[ $file =~ /complete-([^/]+).yaml$ ]] ||
     die "Invalid file to add: '$file'"
   local name="${BASH_REMATCH[1]}"
   git config -f "$COMPLETE_SHELL_ROOT/config" \
@@ -37,11 +37,15 @@ __complete-shell:rehash() {
   )
   set -- "${all[@]}"
   while [[ $# -gt 0 ]]; do
-    local cmd_name="${1#complete-shell.}" bash_file="$2"
+    local cmd_name="${1#complete-shell.}" yaml_file="$2"
     shift; shift
-    source $bash_file || continue
 
-    complete -F __complete-shell:add-completion "$cmd_name"
+    local bash="$(
+      node "$COMPLETE_SHELL_ROOT/lib/complete-shell.js" "$yaml_file"
+    )" || continue
+    eval "$bash" || continue
+
+    complete -F __complete-shell:add-completion "$cmd_name" || continue
   done
 }
 
@@ -59,6 +63,23 @@ __complete-shell:add-completion() {
     fi
   done
   return 0
+}
+
+__complete-shell:check-env() {
+  local rc=0
+  [[ -n "$COMPLETE_SHELL_ROOT" && -d "$COMPLETE_SHELL_ROOT" ]] || {
+    echo "Error: complete-shell not properly activated" >&2
+    rc=1
+  }
+  [[ "$(type -t node)" == file ]] || {
+    echo "Error: complete-shell requires 'node' (node.js) to be installed"
+    rc=1
+  }
+  [[ "$(type -t npm)" == file ]] || {
+    echo "Error: complete-shell requires 'npm' to be installed"
+    rc=1
+  }
+  return $rc
 }
 
 # vim: set ft=sh sw=2 lisp:

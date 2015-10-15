@@ -1,19 +1,6 @@
-cmd: ltc
+cmd: complete-shell
 sub:
-- target
-- create
-- remove
-- scale
-- cancel-task
-- delete-task
-- task
-- logs
-- cells
-- list
-- status
-- visualize
-- debug-logs
 - help
-- test
-- --version
-- --help
+- install
+- add
+- rehash
