@@ -53,6 +53,7 @@ __complete-shell:install() {
 }
 
 __complete-shell:rehash() {
+  IFS=' '$'\t'$'\n'
   local all=(
     $(git config -f $COMPLETE_SHELL_ROOT/config --get-regexp complete-shell)
   )
@@ -136,6 +137,7 @@ can() {
   [ "$(type -t "$1")" == function ]
 }
 
+IFS=' '$'\t'$'\n'
 [[ $0 != $BASH_SOURCE ]] || main "$@"
 
 # vim: set ft=sh sw=2 lisp:
