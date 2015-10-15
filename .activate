@@ -1,12 +1,9 @@
 #! bash
 
-main() {
-  export COMPLETE_SHELL_ROOT="$(cd -P "$(dirname "$BASH_SOURCE")"; pwd)"
-  export PATH="$COMPLETE_SHELL_ROOT/bin:$PATH"
-  export MANPATH="$COMPLETE_SHELL_ROOT/man:$MANPATH"
+export COMPLETE_SHELL_ROOT="$(cd -P "$(dirname "$BASH_SOURCE")"; pwd)"
+export PATH="$COMPLETE_SHELL_ROOT/bin:$PATH"
+export MANPATH="$COMPLETE_SHELL_ROOT/man:$MANPATH"
 
-  source "$COMPLETE_SHELL_ROOT/bin/complete-shell"
-  __complete-shell:add "$COMPLETE_SHELL_ROOT/share/complete-complete-shell.bash"
-}
-
-main "$@"
+source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash"
+__complete-shell:add \
+  "$COMPLETE_SHELL_ROOT/share/complete-complete-shell.bash"

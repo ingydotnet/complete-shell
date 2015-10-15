@@ -83,7 +83,9 @@ complete-shell \- Command Completion for Everything
 .IX Header "Status"
 \&\s-1WARNING: THIS FRAMEWORK IS BRAND NEW.\s0
 .PP
-It's really not any good yet! The \s-1API \s0\fBwill\fR change!
+It's really not any good yet!
+.PP
+The \s-1API \s0\fBwill\fR change!
 .IP "\(bu" 4
 Only completes subcommands
 .IP "\(bu" 4
@@ -100,21 +102,36 @@ Stay tuned.
 Pull Requests welcome!
 .SH "Synopsis"
 .IX Header "Synopsis"
-.Vb 3
-\&    # Install a command\-completion\-definition repo from GitHub. Like Vagrant,
-\&    # for example:
+.Vb 1
+\&    # First install complete\-shell as described in "Installation" below.
+\&
+\&    # Next install complete\-shell definition repos from GitHub. Like this one for
+\&    # Vagrant, for example:
 \&    complete\-shell install ingydotnet/vagrant
 \&
-\&    vagrant <TAB><TAB>
+\&    vagrant <TAB><TAB>  # Completion should work.
 .Ve
 .SH "Description"
 .IX Header "Description"
 CompleteShell adds command completion for everything, everywhere. It provides a framework for common shells to define completion with simple \s-1YAML\s0 or \s-1JSON\s0 files.
 .PP
 People can easily write completion definition files for commands that don't yet have completion and share them with the world. They can also write their own custom files, or fine tune existing ones to their liking.
+.SH "Installation"
+.IX Header "Installation"
+Run these commands:
+.PP
+.Vb 2
+\&    # clone the Git repo:
+\&    git clone https://github.com/ingydotnet/complete\-shell
+\&
+\&    # source the .activate file your Shell startup configuration file:
+\&    source /path/to/complete\-shell/.activate
+.Ve
+.PP
+That's it!
 .SH "Basic Usage"
 .IX Header "Basic Usage"
-Here is a simple example. Define a file called \f(CW\*(C`~/complete\-foo.yaml\*(C'\fR:
+Here is a simple example. Define a file called \f(CW\*(C`complete\-foo.yaml\*(C'\fR:
 .PP
 .Vb 10
 \&    # Command name
@@ -131,23 +148,11 @@ Here is a simple example. Define a file called \f(CW\*(C`~/complete\-foo.yaml\*(
 .PP
 Then run:
 .PP
-.Vb 2
-\&    complete\-shell make\-bash ~/complete\-foo.yaml
-\&    complete\-shell add ~/complete\-foo.bash
+.Vb 1
+\&    complete\-shell add complete\-foo.yaml
 .Ve
 .PP
 Now you have command completion for the \f(CW\*(C`foo\*(C'\fR command!
-.SH "Installation"
-.IX Header "Installation"
-Run these commands:
-.PP
-.Vb 3
-\&    git clone https://github.com/ingydotnet/complete\-shell
-\&    # In your Shell startup configuration file:
-\&    source /path/to/complete\-shell/.activate
-.Ve
-.PP
-That's it!
 .ie n .SH "The ""complete\-shell"" Command"
 .el .SH "The \f(CWcomplete\-shell\fP Command"
 .IX Header "The complete-shell Command"
