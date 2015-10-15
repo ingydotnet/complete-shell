@@ -1,6 +1,22 @@
 #!/usr/bin/env bash
 
-die() { echo "$@" >&2; exit 1; }
+OPTIONS_SPEC="\
+  $(basename $0) [<options>] <command> <arguments>
+
+Commands:
+
+  install <github-user/complete-'command'>
+  add <complete-'command'.bash>
+  rehash
+
+See 'complete-shell help' for complete help.
+
+Options:
+--
+h           Show the command summary
+ 
+x           Debug - Turn on Bash trace (set -x) output
+"
 
 main() {
   check-env
@@ -50,6 +66,10 @@ __complete-shell:rehash() {
   done
 }
 
+__complete-shell:help() {
+  exec man complete-shell
+}
+
 __complete-shell:add-completion() {
   local cmd="$1" word="$2" prev="$3"
   set -- $("__complete-shell::$cmd")
@@ -68,8 +88,52 @@ check-env() {
 }
 
 get-opts() {
+  if [ $# -eq 0 ]; then
+    set -- --help
+  else
+    set -- "$@"
+  fi
+
+  rc=0
+  parsed="$(
+    echo "$OPTIONS_SPEC" |
+    git rev-parse --parseopt -- "$@"
+  )" || rc=$?
+  if [ $rc -eq 0 ]; then
+    eval "$parsed"
+  else
+    if [[ $PAGER == less ]]; then
+      eval "$parsed" | less -FRX
+    else
+      eval "$parsed"
+    fi
+    exit $rc
+  fi
+
+  while [ $# -gt 0 ]; do
+    local option="$1"; shift
+    case "$option" in
+      -c)
+        cell_count="$1"
+        shift
+        ;;
+      --) break ;;
+      -x) set -x ;;
+      *) error "unexpected option '$option'" ;;
+    esac
+  done
+
   command_name="$1"; shift
   command_args=("$@")
+
+  can "__complete-shell:$command_name" ||
+    die "Invalid command: '$command_name'"
+}
+
+die() { echo "$@" >&2; exit 1; }
+
+can() {
+  [ "$(type -t "$1")" == function ]
 }
 
 [[ $0 != $BASH_SOURCE ]] || main "$@"
