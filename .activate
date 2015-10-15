@@ -6,7 +6,7 @@ main() {
   export MANPATH="$COMPLETE_SHELL_ROOT/man:$MANPATH"
 
   source "$COMPLETE_SHELL_ROOT/bin/complete-shell"
-  complete-shell:add "$COMPLETE_SHELL_ROOT/share/complete-complete-shell.bash"
+  __complete-shell:add "$COMPLETE_SHELL_ROOT/share/complete-complete-shell.bash"
 }
 
 main "$@"
