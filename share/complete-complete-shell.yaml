@@ -1,6 +1,0 @@
-cmd: complete-shell
-sub:
-- help
-- install
-- add
-- rehash

@@ -1,0 +1,13 @@
+.complete-shell v0.0.1
+
+.cmd complete-shell
+
+.opt --verbose
+.opt --quiet
+
+.sub help
+.sub install
+.sub add
+.sub rehash
+
+.end

@@ -1,3 +1,2 @@
-config
-source
-node_modules
+.config
+.src

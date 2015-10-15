@@ -9,17 +9,40 @@ WARNING: THIS FRAMEWORK IS BRAND NEW.
 
 It's really not any good yet!
 
-The API *will* change!
-
 * Only completes subcommands
 * Only completes 1 level
-* Only tested on Linux so far
 * Only works on Bash so far
-* Only supports YAML definition files so far
+* No tests yet
 
-Stay tuned.
+Stay tuned... Pull Requests welcome!
 
-Pull Requests welcome!
+= Synopsis
+
+  # First install complete-shell as described in "Installation", below:
+  git clone https://github.com/ingydotnet/complete-shell
+  source /path/to/complete-shell/.activate
+
+  # Next install some complete-shell definition repos from GitHub.
+  # For example:
+  complete-shell install ingydotnet/complete-vagrant
+  complete-shell install ingydotnet/complete-openstack
+
+  vagrant <TAB><TAB>  # Completion should work.
+
+= Description
+
+CompleteShell adds command completion for everything, everywhere. It provides a
+framework to define command completion in a simple, single file format.
+
+CompleteShell works in:
+
+* Bash
+* zsh (soon)
+* Fish (soon)
+
+People can easily write complete-shell files for commands that don't yet have
+completion and share them with the world. They can also write their own custom
+files, or fine tune existing ones to their liking.
 
 = Installation
 
@@ -33,44 +56,25 @@ Run these commands:
 
 That's it!
 
-= Synopsis
-
-  # First install complete-shell as described in "Installation" above.
-
-  # Next install complete-shell definition repos from GitHub. Like this one for
-  # Vagrant, for example:
-  complete-shell install ingydotnet/complete-vagrant
-
-  vagrant <TAB><TAB>  # Completion should work.
-
-= Description
-
-CompleteShell adds command completion for everything, everywhere. It provides
-a framework for common shells to define completion with simple YAML or JSON
-files.
-
-People can easily write completion definition files for commands that don't
-yet have completion and share them with the world. They can also write their
-own custom files, or fine tune existing ones to their liking.
-
 = Basic Usage
 
-Here is a simple example. Define a file called `complete-foo.yaml`:
+Here is a simple example. Define a file called `complete-foo`:
 
-  # Command name
-  cmd: foo
-  # Command options
-  opt:
-  - --aaa
-  - --bbb
-  # Sub-commands
-  sub:
-  - cmd: bar
-  - cmd: baz
+  + complete-shell 0.0.1
+  # Command name:
+  + command foo
+  # Command options:
+  + options \
+    --aaa \
+    --bbb
+  # Sub-commands:
+  + subcommands \
+    bar \
+    baz
 
 Then run:
 
-  complete-shell add complete-foo.yaml
+  complete-shell add complete-foo
 
 Now you have command completion for the `foo` command!
 
@@ -95,13 +99,10 @@ Here is a list of commands:
 
 = Some Completion Repos
 
-- `ingydotnet/vagrant`
+- `ingydotnet/complete-vagrant`
 
-  Command completion for the Vagrant command.
+  Command completion for the `vagrant` command.
 
-= Development
+- `ingydotnet/complete-openstack`
 
-= To Do
-
-...lots...
-
+  Command completion for the OpenStack commands like `nova` and `neutron`.

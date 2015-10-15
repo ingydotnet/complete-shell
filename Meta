@@ -20,14 +20,3 @@ devel:
   git: https://github.com/ingydotnet/compile-shell
   bug: https://github.com/ingydotnet/compile-shell/issues
   irc: irc.freenode.net#golf
-
-=npm:
-  name: compile-shell
-  engines:
-    node: '>=0.4.0'
-  devDependencies:
-    argparse: '>=0'
-    coffee-script: '>=1.3.3'
-    js-yaml: '>=0.0.0'
-  scripts:
-    test: coffee -e '(require "./test/lib/Test/Harness").run()' test

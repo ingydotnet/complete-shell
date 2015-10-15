@@ -16,25 +16,53 @@ WARNING: THIS FRAMEWORK IS BRAND NEW.
 
 It's really not any good yet!
 
-The API B<will> change!
-
 =over
 
 =item * Only completes subcommands
 
 =item * Only completes 1 level
 
-=item * Only tested on Linux so far
-
 =item * Only works on Bash so far
 
-=item * Only supports YAML definition files so far
+=item * No tests yet
 
 =back
 
-Stay tuned.
+Stay tuned... Pull Requests welcome!
 
-Pull Requests welcome!
+=head1 Synopsis
+
+    # First install complete-shell as described in "Installation", below:
+    git clone https://github.com/ingydotnet/complete-shell
+    source /path/to/complete-shell/.activate
+
+    # Next install some complete-shell definition repos from GitHub.
+    # For example:
+    complete-shell install ingydotnet/complete-vagrant
+    complete-shell install ingydotnet/complete-openstack
+
+    vagrant <TAB><TAB>  # Completion should work.
+
+=head1 Description
+
+CompleteShell adds command completion for everything, everywhere. It provides
+a framework to define command completion in a simple, single file format.
+
+CompleteShell works in:
+
+=over
+
+=item * Bash
+
+=item * zsh (soon)
+
+=item * Fish (soon)
+
+=back
+
+People can easily write complete-shell files for commands that don't yet have
+completion and share them with the world. They can also write their own custom
+files, or fine tune existing ones to their liking.
 
 =head1 Installation
 
@@ -48,44 +76,25 @@ Run these commands:
 
 That's it!
 
-=head1 Synopsis
-
-    # First install complete-shell as described in "Installation" above.
-
-    # Next install complete-shell definition repos from GitHub. Like this one for
-    # Vagrant, for example:
-    complete-shell install ingydotnet/complete-vagrant
-
-    vagrant <TAB><TAB>  # Completion should work.
-
-=head1 Description
-
-CompleteShell adds command completion for everything, everywhere. It
-provides a framework for common shells to define completion with simple YAML
-or JSON files.
-
-People can easily write completion definition files for commands that don't
-yet have completion and share them with the world. They can also write their
-own custom files, or fine tune existing ones to their liking.
-
 =head1 Basic Usage
 
-Here is a simple example. Define a file called C<complete-foo.yaml>:
+Here is a simple example. Define a file called C<complete-foo>:
 
-    # Command name
-    cmd: foo
-    # Command options
-    opt:
-    - --aaa
-    - --bbb
-    # Sub-commands
-    sub:
-    - cmd: bar
-    - cmd: baz
+    + complete-shell 0.0.1
+    # Command name:
+    + command foo
+    # Command options:
+    + options \
+      --aaa \
+      --bbb
+    # Sub-commands:
+    + subcommands \
+      bar \
+      baz
 
 Then run:
 
-    complete-shell add complete-foo.yaml
+    complete-shell add complete-foo
 
 Now you have command completion for the C<foo> command!
 
@@ -116,16 +125,14 @@ Reloads all your completion settings. Not normally needed.
 
 =over
 
-=item C<ingydotnet/vagrant>
+=item C<ingydotnet/complete-vagrant>
 
-Command completion for the Vagrant command.
+Command completion for the C<vagrant> command.
+
+=item C<ingydotnet/complete-openstack>
+
+Command completion for the OpenStack commands like C<nova> and C<neutron>.
 
 =back
-
-=head1 Development
-
-=head1 To Do
-
-...lots...
 
 =cut

@@ -9,12 +9,13 @@ __complete-shell:add() {
     local dir="$(cd -P "$(dirname $file)"; pwd)"
     file="$dir/$(basename $file)"
   fi
-  [[ $file =~ /complete-([^/]+).yaml$ ]] ||
+  [[ $file =~ /complete-([^./]+)$ ]] ||
     die "Invalid file to add: '$file'"
   local name="${BASH_REMATCH[1]}"
-  git config -f "$COMPLETE_SHELL_ROOT/config" \
+  git config -f "$COMPLETE_SHELL_ROOT/.config" \
     "complete-shell.$name" "$file"
-  __complete-shell:rehash
+  source "$COMPLETE_SHELL_ROOT/lib/complete-shell-activate.bash" \
+    complete-shell-activate "$file"
 }
 
 __complete-shell:install() {
@@ -25,28 +26,27 @@ __complete-shell:install() {
   [[ $dir =~ ^complete-([-_a-zA-Z0-9]+)$ ]] ||
     die "Invalid complete-shell repo name: '$dir'"
   local cmd_name="${BASH_REMATCH[1]}"
-  local repo_path="$COMPLETE_SHELL_ROOT/source/$dir"
+  local repo_path="$COMPLETE_SHELL_ROOT/.src/$dir"
   git clone "https://github.com/$target" "$repo_path"
-  __complete-shell:add "$repo_path/complete-$cmd_name.yaml"
+  local file_path=
+  for file_path in "$repo_path"/complete-*; do
+    __complete-shell:add "$file_path"
+  done
+}
+
+__complete-shell:complete-shell() {
+  local version=${1#v}
+  source "$COMPLETE_SHELL_ROOT/lib/complete-shell-$version.bash"
+}
+
++() {
+  local cmd="$1"; shift
+  "__complete-shell:$cmd" "$@"
 }
 
 __complete-shell:rehash() {
-  IFS=' '$'\t'$'\n'
-  local all=(
-    $(git config -f $COMPLETE_SHELL_ROOT/config --get-regexp complete-shell)
-  )
-  set -- "${all[@]}"
-  while [[ $# -gt 0 ]]; do
-    local cmd_name="${1#complete-shell.}" yaml_file="$2"
-    shift; shift
-
-    local bash="$(
-      node "$COMPLETE_SHELL_ROOT/lib/complete-shell.js" "$yaml_file"
-    )" || continue
-    eval "$bash" || continue
-
-    complete -F __complete-shell:add-completion "$cmd_name" || continue
-  done
+  source "$COMPLETE_SHELL_ROOT/lib/complete-shell-activate.bash" \
+    complete-shell-activate-all
 }
 
 __complete-shell:help() {

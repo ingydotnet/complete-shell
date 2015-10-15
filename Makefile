@@ -35,20 +35,11 @@ default: help
 help:
 	@echo 'Makefile rules:'
 	@echo ''
-	@echo '    all        Make js and doc'
-	@echo '    js         Make javascript'
 	@echo '    doc        Generate the docs/manpages'
 	@echo '    test       Run all tests'
 	@echo ''
 # 	@echo 'install    Install $(NAME)'
 # 	@echo 'uninstall  Uninstall $(NAME)'
-
-all: js doc
-
-js: lib/$(NAME).js
-
-lib/%.js: src/%.coffee
-	coffee --compile --print $< > $@
 
 .PHONY: test
 test:

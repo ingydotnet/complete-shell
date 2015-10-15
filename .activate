@@ -1,18 +1,23 @@
 #! bash
 
+# Set up basic complete-shell Bash environment:
+export COMPLETE_SHELL_VERSION=0.0.1
 export COMPLETE_SHELL_ROOT="$(cd -P "$(dirname "$BASH_SOURCE")"; pwd)"
 export PATH="$COMPLETE_SHELL_ROOT/bin:$PATH"
 export MANPATH="$COMPLETE_SHELL_ROOT/man:$MANPATH"
 
-source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash"
+# Assert a healthy bash:
+if (source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash";
+      __complete-shell:check-env); then
+  # Assert completion for `complete-shell` itself:
+  if [[ -z "$(git config -f "$COMPLETE_SHELL_ROOT/.config" \
+              complete-shell.complete-shell)" ]]; then
+    git config -f "$COMPLETE_SHELL_ROOT/.config" \
+        complete-shell.complete-shell \
+        "$COMPLETE_SHELL_ROOT/share/complete-complete-shell"
+  fi
 
-if __complete-shell:check-env; then
-  (
-    cd "$COMPLETE_SHELL_ROOT"
-    [[ -d node_modules ]] || mkdir node_modules
-    [[ -d node_modules/js-yaml ]] ||
-      npm install js-yaml
-  )
-  __complete-shell:add \
-    "$COMPLETE_SHELL_ROOT/share/complete-complete-shell.yaml"
+  # Activate all the configured complete files:
+  source "$COMPLETE_SHELL_ROOT/lib/complete-shell-activate.bash" \
+    complete-shell-activate-all
 fi
