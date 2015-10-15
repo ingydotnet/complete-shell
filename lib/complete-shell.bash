@@ -27,7 +27,7 @@ __complete-shell:install() {
   local cmd_name="${BASH_REMATCH[1]}"
   local repo_path="$COMPLETE_SHELL_ROOT/source/$dir"
   git clone "https://github.com/$target" "$repo_path"
-  __complete-shell:add "$repo_path/complete-$cmd_name.bash"
+  __complete-shell:add "$repo_path/complete-$cmd_name.yaml"
 }
 
 __complete-shell:rehash() {

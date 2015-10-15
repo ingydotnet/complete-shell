@@ -36,13 +36,25 @@ Stay tuned.
 
 Pull Requests welcome!
 
+=head1 Installation
+
+Run these commands:
+
+    # clone the Git repo:
+    git clone https://github.com/ingydotnet/complete-shell
+
+    # source the .activate file your Shell startup configuration file:
+    source /path/to/complete-shell/.activate
+
+That's it!
+
 =head1 Synopsis
 
-    # First install complete-shell as described in "Installation" below.
+    # First install complete-shell as described in "Installation" above.
 
     # Next install complete-shell definition repos from GitHub. Like this one for
     # Vagrant, for example:
-    complete-shell install ingydotnet/vagrant
+    complete-shell install ingydotnet/complete-vagrant
 
     vagrant <TAB><TAB>  # Completion should work.
 
@@ -55,18 +67,6 @@ or JSON files.
 People can easily write completion definition files for commands that don't
 yet have completion and share them with the world. They can also write their
 own custom files, or fine tune existing ones to their liking.
-
-=head1 Installation
-
-Run these commands:
-
-    # clone the Git repo:
-    git clone https://github.com/ingydotnet/complete-shell
-
-    # source the .activate file your Shell startup configuration file:
-    source /path/to/complete-shell/.activate
-
-That's it!
 
 =head1 Basic Usage
 

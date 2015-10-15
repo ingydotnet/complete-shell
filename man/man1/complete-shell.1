@@ -100,22 +100,6 @@ Only supports \s-1YAML\s0 definition files so far
 Stay tuned.
 .PP
 Pull Requests welcome!
-.SH "Synopsis"
-.IX Header "Synopsis"
-.Vb 1
-\&    # First install complete\-shell as described in "Installation" below.
-\&
-\&    # Next install complete\-shell definition repos from GitHub. Like this one for
-\&    # Vagrant, for example:
-\&    complete\-shell install ingydotnet/vagrant
-\&
-\&    vagrant <TAB><TAB>  # Completion should work.
-.Ve
-.SH "Description"
-.IX Header "Description"
-CompleteShell adds command completion for everything, everywhere. It provides a framework for common shells to define completion with simple \s-1YAML\s0 or \s-1JSON\s0 files.
-.PP
-People can easily write completion definition files for commands that don't yet have completion and share them with the world. They can also write their own custom files, or fine tune existing ones to their liking.
 .SH "Installation"
 .IX Header "Installation"
 Run these commands:
@@ -129,6 +113,22 @@ Run these commands:
 .Ve
 .PP
 That's it!
+.SH "Synopsis"
+.IX Header "Synopsis"
+.Vb 1
+\&    # First install complete\-shell as described in "Installation" above.
+\&
+\&    # Next install complete\-shell definition repos from GitHub. Like this one for
+\&    # Vagrant, for example:
+\&    complete\-shell install ingydotnet/complete\-vagrant
+\&
+\&    vagrant <TAB><TAB>  # Completion should work.
+.Ve
+.SH "Description"
+.IX Header "Description"
+CompleteShell adds command completion for everything, everywhere. It provides a framework for common shells to define completion with simple \s-1YAML\s0 or \s-1JSON\s0 files.
+.PP
+People can easily write completion definition files for commands that don't yet have completion and share them with the world. They can also write their own custom files, or fine tune existing ones to their liking.
 .SH "Basic Usage"
 .IX Header "Basic Usage"
 Here is a simple example. Define a file called \f(CW\*(C`complete\-foo.yaml\*(C'\fR:
