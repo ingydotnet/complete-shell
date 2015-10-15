@@ -7,7 +7,9 @@ Command Completion for Everything
 
 WARNING: THIS FRAMEWORK IS BRAND NEW.
 
-It's really not any good yet! The API *will* change!
+It's really not any good yet!
+
+The API *will* change!
 
 * Only completes subcommands
 * Only completes 1 level
@@ -21,11 +23,11 @@ Pull Requests welcome!
 
 = Synopsis
 
-  # Install a command-completion-definition repo from GitHub. Like Vagrant,
-  # for example:
+  # Install a complete-shell definition repo from GitHub. Like this one for
+  # Vagrant, for example:
   complete-shell install ingydotnet/vagrant
 
-  vagrant <TAB><TAB>
+  vagrant <TAB><TAB>  # Completion should work.
 
 = Description
 
@@ -39,7 +41,7 @@ own custom files, or fine tune existing ones to their liking.
 
 = Basic Usage
 
-Here is a simple example. Define a file called `~/complete-foo.yaml`:
+Here is a simple example. Define a file called `complete-foo.yaml`:
 
   # Command name
   cmd: foo
@@ -54,8 +56,8 @@ Here is a simple example. Define a file called `~/complete-foo.yaml`:
 
 Then run:
 
-  complete-shell make-bash ~/complete-foo.yaml
-  complete-shell add ~/complete-foo.bash
+  complete-shell make-bash complete-foo.yaml
+  complete-shell add complete-foo.bash
 
 Now you have command completion for the `foo` command!
 

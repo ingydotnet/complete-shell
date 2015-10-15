@@ -2,13 +2,11 @@
 
 main() {
   export COMPLETE_SHELL_ROOT="$(cd -P "$(dirname "$BASH_SOURCE")"; pwd)"
-  # readonly COMPLETE_SHELL_ROOT
   export PATH="$COMPLETE_SHELL_ROOT/bin:$PATH"
   export MANPATH="$COMPLETE_SHELL_ROOT/man:$MANPATH"
 
-  source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash"
-
-  complete-shell add share/complete-complete-shell.bash
+  source "$COMPLETE_SHELL_ROOT/bin/complete-shell"
+  complete-shell:add "$COMPLETE_SHELL_ROOT/share/complete-complete-shell.bash"
 }
 
 main "$@"
