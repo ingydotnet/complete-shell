@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 OPTIONS_SPEC="\
-  $(basename $0) [<options>] <command> <arguments>
+  $(basename $BASH_SOURCE) [<options>] <command> <arguments>
 
 Commands:
 
