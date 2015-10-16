@@ -2,12 +2,14 @@
 
 .cmd complete-shell
 
-.opt --verbose
-.opt --quiet
-
 .sub help
+.sub search
 .sub install
 .sub add
-.sub rehash
+.sub delete
+.sub enable
+.sub disable
+.sub upgrade
+.sub reactivate
 
 .end
