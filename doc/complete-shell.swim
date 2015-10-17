@@ -64,6 +64,12 @@ That's it!
 
 = Commands
 
+- `help`
+
+  Display the complete-shell manpage. Same as `man complete-shell`.
+
+  The `-h` option will display a quick reference help guide.
+
 - `search [<search string>]`
 
   Find registered compdef files that are available online.
@@ -87,13 +93,10 @@ That's it!
 
   Enable a compdef. Usually only after you have disabled it.
 
-- `enable <compdef-name>`
-
-  Enable a compdef. Usually only after you have disabled it.
-
 - `disable <compdef-name>`
 
-  Enable a compdef. Usually only after you have disabled it.
+  Disable a compdef (but don't delete it). Use this to turn of a specific
+  command completion temporarily. Use the `enable` command to turn it back on.
 
 - `upgrade`
 

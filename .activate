@@ -1,23 +1,25 @@
 #! bash
 
 # Set up basic complete-shell Bash environment:
-export COMPLETE_SHELL_VERSION=0.0.1
+export COMPLETE_SHELL_API_VERSION=0.0.1
 export COMPLETE_SHELL_ROOT="$(cd -P "$(dirname "$BASH_SOURCE")"; pwd)"
 export PATH="$COMPLETE_SHELL_ROOT/bin:$PATH"
 export MANPATH="$COMPLETE_SHELL_ROOT/man:$MANPATH"
 
 # Assert a healthy bash:
-if (source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash";
-      __complete-shell:check-env); then
-  # Assert completion for `complete-shell` itself:
+if (source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash" \
+    complete-shell:check-env); then
+
+  # Assert that `complete-shell` has a compdef itself:
   if [[ -z "$(git config -f "$COMPLETE_SHELL_ROOT/.config" \
-              complete-shell.complete-shell)" ]]; then
+              compdef.complete-shell)" ]]; then
+    # Manually add the complete-shell compdef file:
     git config -f "$COMPLETE_SHELL_ROOT/.config" \
-        complete-shell.complete-shell \
+        compdef.complete-shell \
         "$COMPLETE_SHELL_ROOT/share/complete-complete-shell"
   fi
 
-  # Activate all the configured complete files:
-  source "$COMPLETE_SHELL_ROOT/lib/complete-shell-activate.bash" \
-    complete-shell-activate-all
+  # Activate all the enabled compdef files:
+  source "$COMPLETE_SHELL_ROOT/lib/complete-shell.bash" \
+    complete-shell:activate-all
 fi
