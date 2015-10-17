@@ -80,48 +80,76 @@ Run these commands:
 
 That's it!
 
+=head2 Prerequisites
+
+=over
+
+=item Bash 3.2+
+
+Even if you don't use Bash as your shell, C<complete-shell> needs it because
+it is written in Bash. Fortunately most computers have Bash 3.2+ installed.
+
+=item Git
+
+Git is used not only for getting compdef repos, but also for reading and
+writing to the C<complete-shell> config file. It also is used for (its
+awesome) command line options parsing facility.
+
+=back
+
 =head1 Commands
 
 =over
 
-=item C<< search [<search string>] >>
+=item C<complete-shell help>
+
+Display the complete-shell manpage. Same as C<man complete-shell>.
+
+The C<-h> option will display a quick reference help guide.
+
+=item C<< complete-shell search [<search string>] >>
 
 Find registered compdef files that are available online.
 
-=item C<< install <compdef-target> >>
+=item C<< complete-shell install <compdef-target> >>
 
 Installs compdef files from git repos online. You can find these repos using
 the C<search> command or use other ones that you know about. C<compdef-target>
 can be a simple name (found in search) or a git repo URL.
 
-=item C<< add <compdef-filepath> >>
+=item C<< complete-shell add <compdef-filepath> >>
 
 Adds a local compdef file path to your config. It will be enabled by default.
 
-=item C<< delete <compdef-name> >>
+=item C<< complete-shell delete <compdef-name> >>
 
 Delete a compdef file from your configuration.
 
-=item C<< enable <compdef-name> >>
+=item C<< complete-shell enable <compdef-name> >>
 
 Enable a compdef. Usually only after you have disabled it.
 
-=item C<< enable <compdef-name> >>
+=item C<< complete-shell disable <compdef-name> >>
 
-Enable a compdef. Usually only after you have disabled it.
+Disable a compdef (but don't delete it). Use this to turn of a specific
+command completion temporarily. Use the C<enable> command to turn it back on.
 
-=item C<< disable <compdef-name> >>
+=item `complete-shell alias <command-name> <alias>
 
-Enable a compdef. Usually only after you have disabled it.
+This command will create an alias for an existing command that has the same
+command completion. Try making the alias C<cs> for the command C<complete-
+shell>:
 
-=item C<upgrade>
+    complete-shell alias complete-shell cs
+
+=item C<complete-shell upgrade>
 
 Upgrade your C<complete-shell> installation to the latest version.
 
-=item C<reactivate>
+=item C<complete-shell reactivate>
 
-Reloads all your compdef settings. Usually this happens automatically, but
-this lets you do it by hand.
+Reloads all your compdef settings. Usually this happens automatically when it
+is supposed to, but this lets you do it by hand if you need to.
 
 =back
 

@@ -56,12 +56,8 @@ complete-shell:check-env() {
     echo "Error: complete-shell not properly activated" >&2
     rc=1
   }
-  [[ "$(type -t node)" == file ]] || {
-    echo "Error: complete-shell requires 'node' (node.js) to be installed"
-    rc=1
-  }
-  [[ "$(type -t npm)" == file ]] || {
-    echo "Error: complete-shell requires 'npm' to be installed"
+  [[ "$(type -t git)" == file ]] || {
+    echo "Error: complete-shell requires 'git' to be installed"
     rc=1
   }
   return $rc

@@ -138,44 +138,61 @@ Run these commands:
 .Ve
 .PP
 That's it!
+.SS "Prerequisites"
+.IX Subsection "Prerequisites"
+.IP "Bash 3.2+" 4
+.IX Item "Bash 3.2+"
+Even if you don't use Bash as your shell, \f(CW\*(C`complete\-shell\*(C'\fR needs it because it is written in Bash. Fortunately most computers have Bash 3.2+ installed.
+.IP "Git" 4
+.IX Item "Git"
+Git is used not only for getting compdef repos, but also for reading and writing to the \f(CW\*(C`complete\-shell\*(C'\fR config file. It also is used for (its awesome) command line options parsing facility.
 .SH "Commands"
 .IX Header "Commands"
-.ie n .IP """search [<search string>]""" 4
-.el .IP "\f(CWsearch [<search string>]\fR" 4
-.IX Item "search [<search string>]"
+.ie n .IP """complete\-shell help""" 4
+.el .IP "\f(CWcomplete\-shell help\fR" 4
+.IX Item "complete-shell help"
+Display the complete-shell manpage. Same as \f(CW\*(C`man complete\-shell\*(C'\fR.
+.Sp
+The \f(CW\*(C`\-h\*(C'\fR option will display a quick reference help guide.
+.ie n .IP """complete\-shell search [<search string>]""" 4
+.el .IP "\f(CWcomplete\-shell search [<search string>]\fR" 4
+.IX Item "complete-shell search [<search string>]"
 Find registered compdef files that are available online.
-.ie n .IP """install <compdef\-target>""" 4
-.el .IP "\f(CWinstall <compdef\-target>\fR" 4
-.IX Item "install <compdef-target>"
+.ie n .IP """complete\-shell install <compdef\-target>""" 4
+.el .IP "\f(CWcomplete\-shell install <compdef\-target>\fR" 4
+.IX Item "complete-shell install <compdef-target>"
 Installs compdef files from git repos online. You can find these repos using the \f(CW\*(C`search\*(C'\fR command or use other ones that you know about. \f(CW\*(C`compdef\-target\*(C'\fR can be a simple name (found in search) or a git repo \s-1URL.\s0
-.ie n .IP """add <compdef\-filepath>""" 4
-.el .IP "\f(CWadd <compdef\-filepath>\fR" 4
-.IX Item "add <compdef-filepath>"
+.ie n .IP """complete\-shell add <compdef\-filepath>""" 4
+.el .IP "\f(CWcomplete\-shell add <compdef\-filepath>\fR" 4
+.IX Item "complete-shell add <compdef-filepath>"
 Adds a local compdef file path to your config. It will be enabled by default.
-.ie n .IP """delete <compdef\-name>""" 4
-.el .IP "\f(CWdelete <compdef\-name>\fR" 4
-.IX Item "delete <compdef-name>"
+.ie n .IP """complete\-shell delete <compdef\-name>""" 4
+.el .IP "\f(CWcomplete\-shell delete <compdef\-name>\fR" 4
+.IX Item "complete-shell delete <compdef-name>"
 Delete a compdef file from your configuration.
-.ie n .IP """enable <compdef\-name>""" 4
-.el .IP "\f(CWenable <compdef\-name>\fR" 4
-.IX Item "enable <compdef-name>"
+.ie n .IP """complete\-shell enable <compdef\-name>""" 4
+.el .IP "\f(CWcomplete\-shell enable <compdef\-name>\fR" 4
+.IX Item "complete-shell enable <compdef-name>"
 Enable a compdef. Usually only after you have disabled it.
-.ie n .IP """enable <compdef\-name>""" 4
-.el .IP "\f(CWenable <compdef\-name>\fR" 4
-.IX Item "enable <compdef-name>"
-Enable a compdef. Usually only after you have disabled it.
-.ie n .IP """disable <compdef\-name>""" 4
-.el .IP "\f(CWdisable <compdef\-name>\fR" 4
-.IX Item "disable <compdef-name>"
-Enable a compdef. Usually only after you have disabled it.
-.ie n .IP """upgrade""" 4
-.el .IP "\f(CWupgrade\fR" 4
-.IX Item "upgrade"
+.ie n .IP """complete\-shell disable <compdef\-name>""" 4
+.el .IP "\f(CWcomplete\-shell disable <compdef\-name>\fR" 4
+.IX Item "complete-shell disable <compdef-name>"
+Disable a compdef (but don't delete it). Use this to turn of a specific command completion temporarily. Use the \f(CW\*(C`enable\*(C'\fR command to turn it back on.
+.IP "`complete\-shell alias <command\-name> <alias>" 4
+.IX Item "`complete-shell alias <command-name> <alias>"
+This command will create an alias for an existing command that has the same command completion. Try making the alias \f(CW\*(C`cs\*(C'\fR for the command \f(CW\*(C`complete\-shell\*(C'\fR:
+.Sp
+.Vb 1
+\&    complete\-shell alias complete\-shell cs
+.Ve
+.ie n .IP """complete\-shell upgrade""" 4
+.el .IP "\f(CWcomplete\-shell upgrade\fR" 4
+.IX Item "complete-shell upgrade"
 Upgrade your \f(CW\*(C`complete\-shell\*(C'\fR installation to the latest version.
-.ie n .IP """reactivate""" 4
-.el .IP "\f(CWreactivate\fR" 4
-.IX Item "reactivate"
-Reloads all your compdef settings. Usually this happens automatically, but this lets you do it by hand.
+.ie n .IP """complete\-shell reactivate""" 4
+.el .IP "\f(CWcomplete\-shell reactivate\fR" 4
+.IX Item "complete-shell reactivate"
+Reloads all your compdef settings. Usually this happens automatically when it is supposed to, but this lets you do it by hand if you need to.
 .ie n .SH "The ""compdef"" File"
 .el .SH "The \f(CWcompdef\fP File"
 .IX Header "The compdef File"

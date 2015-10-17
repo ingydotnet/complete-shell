@@ -62,50 +62,70 @@ Run these commands:
 
 That's it!
 
+== Prerequisites
+
+- Bash 3.2+
+
+  Even if you don't use Bash as your shell, `complete-shell` needs it because
+  it is written in Bash. Fortunately most computers have Bash 3.2+ installed.
+
+- Git
+
+  Git is used not only for getting compdef repos, but also for reading and
+  writing to the `complete-shell` config file. It also is used for (its
+  awesome) command line options parsing facility.
+
 = Commands
 
-- `help`
+- `complete-shell help`
 
   Display the complete-shell manpage. Same as `man complete-shell`.
 
   The `-h` option will display a quick reference help guide.
 
-- `search [<search string>]`
+- `complete-shell search [<search string>]`
 
   Find registered compdef files that are available online.
 
-- `install <compdef-target>`
+- `complete-shell install <compdef-target>`
 
   Installs compdef files from git repos online. You can find these repos using
   the `search` command or use other ones that you know about. `compdef-target`
   can be a simple name (found in search) or a git repo URL.
 
-- `add <compdef-filepath>`
+- `complete-shell add <compdef-filepath>`
 
   Adds a local compdef file path to your config. It will be enabled by
   default.
 
-- `delete <compdef-name>`
+- `complete-shell delete <compdef-name>`
 
   Delete a compdef file from your configuration.
 
-- `enable <compdef-name>`
+- `complete-shell enable <compdef-name>`
 
   Enable a compdef. Usually only after you have disabled it.
 
-- `disable <compdef-name>`
+- `complete-shell disable <compdef-name>`
 
   Disable a compdef (but don't delete it). Use this to turn of a specific
   command completion temporarily. Use the `enable` command to turn it back on.
 
-- `upgrade`
+- `complete-shell alias <command-name> <alias>
+
+  This command will create an alias for an existing command that has the same
+  command completion. Try making the alias `cs` for the command `complete-shell`:
+
+    complete-shell alias complete-shell cs
+
+- `complete-shell upgrade`
 
   Upgrade your `complete-shell` installation to the latest version.
 
-- `reactivate`
+- `complete-shell reactivate`
 
-  Reloads all your compdef settings. Usually this happens automatically, but
-  this lets you do it by hand.
+  Reloads all your compdef settings. Usually this happens automatically when it
+  is supposed to, but this lets you do it by hand if you need to.
 
 = The `compdef` File
 
