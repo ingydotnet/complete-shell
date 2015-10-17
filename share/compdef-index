@@ -1,4 +1,0 @@
-vagrant https://github.com/ingydotnet/complete-vagrant
-vagrant Vagrant completion
-openstack https://github.com/ingydotnet/complete-openstack
-openstack Completion for nova, neutron and others

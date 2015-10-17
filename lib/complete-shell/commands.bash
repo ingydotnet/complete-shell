@@ -8,23 +8,57 @@ complete-shell:help() {
 }
 
 complete-shell:search() {
-  :
+  local term="$1"
+  (
+    if [[ -n $term ]]; then
+      grep "$term" "$COMPLETE_SHELL_ROOT/share/index"
+    else
+      cat "$COMPLETE_SHELL_ROOT/share/index"
+    fi
+  ) |
+  (
+    while IFS= read line; do
+      eval "vars=($line)"
+      name="${vars[0]}"
+      from="${vars[1]}"
+      cmds="${vars[2]}"
+      info="${vars[3]}"
+      cat <<...
+$name
+  From: $from
+  Cmds: $cmds
+  Info: $info
+...
+    done
+  ) | less -FRX
 }
 
 complete-shell:install() {
-  local target="$1"
-  [[ $target =~ ^([-_a-zA-Z0-9]+)/([-_a-zA-Z0-9]+)$ ]] ||
-    die "Invalid install target '$target'"
-  local dir="${BASH_REMATCH[2]}"
-  [[ $dir =~ ^complete-([-_a-zA-Z0-9]+)$ ]] ||
-    die "Invalid complete-shell repo name: '$dir'"
-  local cmd_name="${BASH_REMATCH[1]}"
-  local repo_path="$COMPLETE_SHELL_ROOT/.src/$dir"
-  git clone "https://github.com/$target" "$repo_path"
+  local name="$1"
+  line="$(grep "^$name\ " "$COMPLETE_SHELL_ROOT/share/index" | head -n1)"
+  if [[ -z $line ]]; then
+    echo "Invalid complete-shell install name: '$name'"
+    exit 1
+  fi
+  eval "vars=($line)"
+  local compgen_name="${vars[0]}"
+  local repo_url="${vars[1]}"
+  local repo_path="$COMPLETE_SHELL_ROOT/.src/$compgen_name"
+  if [[ -d $repo_path ]]; then
+    (
+      cd "$repo_path"
+      git pull --ff-only &> /dev/null
+      echo "$repo_url updated"
+    )
+  else
+    git clone "$repo_url" "$repo_path" &> /dev/null
+    echo "$repo_url cloned"
+  fi
   local file_path=
   for file_path in "$repo_path"/complete-*; do
     [[ ! $file_path =~ \* ]] || continue
     complete-shell:add "$file_path"
+    echo "$file_path added"
   done
 }
 
@@ -42,23 +76,42 @@ complete-shell:add() {
 }
 
 complete-shell:delete() {
-  :
+  die "'complete-shell delete' not yet implemented"
 }
 
 complete-shell:enable() {
-  :
+  die "'complete-enable delete' not yet implemented"
 }
 
 complete-shell:disable() {
-  :
+  die "'complete-disable delete' not yet implemented"
 }
 
+# Just cd to the complete-shell repo and pull:
 complete-shell:upgrade() {
-  :
+  (
+    set -x
+    cd "$COMPLETE_SHELL_ROOT"
+    git pull --ff-only
+  )
 }
 
+# Don't do anything here. Reactivates in the `complete-shell` wrapper function:
 complete-shell:reactivate() {
   :
+}
+
+# Mostly for testing:
+complete-shell:__reset() {
+  (
+    set -x
+    cd "$COMPLETE_SHELL_ROOT"
+    mkdir -p /tmp/complete-shell-backup
+    [[ -f .config ]] &&
+      mv .config /tmp/complete-shell-backup/config-$$
+    [[ -f .src ]] &&
+      mv .src /tmp/complete-shell-backup/src-$$
+  )
 }
 
 # vim: set ft=sh sw=2 lisp:

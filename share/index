@@ -1,0 +1,3 @@
+lattice     https://github.com/ingydotnet/complete-ltc          'ltc'       'http://lattice.cf/'
+openstack   https://github.com/ingydotnet/complete-openstack    'nova'      'http://docs.openstack.org/'
+vagrant     https://github.com/ingydotnet/complete-vagrant      'vagrant'   'https://www.vagrantup.com/'

@@ -8,6 +8,8 @@ complete-shell() {
 
   if [[ $1 =~ ^(add|delete|enable|disable|install|reactivate)$ ]]; then
     source $BASH_SOURCE complete-shell:activate-all || return $?
+  elif [[ $1 == __reset ]]; then
+    exec bash -l
   fi
 }
 
