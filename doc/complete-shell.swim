@@ -7,7 +7,7 @@ Command Completion for Everything
 
   # Install complete-shell:
   git clone https://github.com/ingydotnet/complete-shell
-  source /path/to/complete-shell/.activate.bash           # or .zsh or .fish
+  source /path/to/complete-shell/.rc.bash           # or .zsh or .fish
 
   # Search for existing complete-shell "compdef" files:
   complete-shell search
@@ -57,8 +57,8 @@ Run these commands:
   # clone the Git repo:
   git clone https://github.com/ingydotnet/complete-shell
 
-  # `source` the .activate file in your shell startup configuration file:
-  source /path/to/complete-shell/.activate.bash   # or .zsh, .fish
+  # `source` the .rc file in your shell startup configuration file:
+  source /path/to/complete-shell/.rc.bash   # or .zsh, .fish
 
 That's it!
 

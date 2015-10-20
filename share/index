@@ -1,3 +1,4 @@
 lattice     https://github.com/ingydotnet/complete-ltc          'ltc'       'http://lattice.cf/'
 openstack   https://github.com/ingydotnet/complete-openstack    'nova'      'http://docs.openstack.org/'
+terraform   https://github.com/ingydotnet/complete-terraform    'terraform' 'https://terraform.io/'
 vagrant     https://github.com/ingydotnet/complete-vagrant      'vagrant'   'https://www.vagrantup.com/'
